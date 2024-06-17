@@ -1,8 +1,13 @@
 .header {
     display: flex;
     flex-direction: row;
-    background-color: rgb(0, 0, 0, 0.5);
+    background: linear-gradient(90deg, #ff0000 0%, #ff7300 100%);
     font-size: 36px;
-    margin: 10px;
+    margin: 1rem;
+    padding: 1rem;
     gap: 30px;
+}
+
+a {
+    text-decoration: none;
 }
