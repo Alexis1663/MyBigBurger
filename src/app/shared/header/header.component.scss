@@ -1,13 +1,33 @@
 .header {
     display: flex;
     flex-direction: row;
-    background: linear-gradient(90deg, #ff0000 0%, #ff7300 100%);
-    font-size: 36px;
-    margin: 1rem;
+    background: #5DADE2;
+    font-size: 25px;
     padding: 1rem;
     gap: 30px;
+    width: 100%;
+    z-index: 1000;
+    top: 0;
+    position: fixed;
 }
 
 a {
+    position: relative;
     text-decoration: none;
+    color: white;
+}
+
+a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: currentColor;
+    transition: width 0.3s ease-out;
+}
+
+a:hover::after {
+    width: 100%;
 }
