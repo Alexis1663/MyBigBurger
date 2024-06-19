@@ -1,6 +1,7 @@
 .header {
     display: flex;
     flex-direction: row;
+    align-items: center;
     background: #5DADE2;
     font-size: 25px;
     padding: 1rem;
@@ -22,7 +23,7 @@ a::after {
     position: absolute;
     width: 0;
     height: 2px;
-    bottom: 0;
+    bottom: -4px;
     left: 0;
     background-color: currentColor;
     transition: width 0.3s ease-out;
@@ -30,4 +31,13 @@ a::after {
 
 a:hover::after {
     width: 100%;
+}
+
+.home-link {
+    text-decoration: none; /* Annule le soulignement par défaut */
+    color: white; 
+}
+
+.home-link:hover::after {
+    width: 0; /* Empêche l'extension de la ligne au survol */
 }
