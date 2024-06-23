@@ -1,6 +1,6 @@
-import {ReceipeIngredientModel} from "./receipe-ingredient";
+import {ReceipeIngredientModel} from "./recipe-ingredient";
 
-export class ReceipeModel {
+export class RecipeModel {
     private readonly _name: string | undefined;
     private readonly _description: string | undefined;
     private readonly _ingredients: ReceipeIngredientModel[] | undefined;

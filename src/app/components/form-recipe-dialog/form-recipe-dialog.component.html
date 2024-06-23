@@ -1,0 +1,22 @@
+<div class="global-container">
+    <h1 mat-dialog-title>Form recette</h1>
+    <mat-dialog-content>
+        <form [formGroup]="formRecipe">
+            <mat-form-field>
+                <mat-label>Nom</mat-label>
+                <input matInput formControlName="name" />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Description</mat-label>
+                <input matInput formControlName="description" />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Image</mat-label>
+                <input matInput formControlName="image" />
+            </mat-form-field>
+        </form>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button>Ajouter</button>
+    </mat-dialog-actions>
+</div>
