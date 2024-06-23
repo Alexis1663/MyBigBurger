@@ -1,8 +1,6 @@
-import {Component, inject} from '@angular/core';
-import {RouterOutlet} from '@angular/router';
-import {HeaderComponent} from './shared/components/header/header.component';
-import {FormRecipeDialogComponent} from "./components/form-recipe-dialog/form-recipe-dialog.component";
-import {MatDialog} from "@angular/material/dialog";
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { HeaderComponent } from './shared/header/header.component';
 
 @Component({
     selector: 'app-root',
