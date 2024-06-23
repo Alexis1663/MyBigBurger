@@ -4,10 +4,19 @@ h1 {
 
 .global-container {
     padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
 }
 
 form {
     display: flex;
     flex-direction: column;
     justify-content: start;
+}
+
+mat-dialog-actions {
+    display: flex;
+    justify-content: center;
 }

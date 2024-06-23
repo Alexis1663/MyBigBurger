@@ -4,6 +4,7 @@ import {MatDialogActions, MatDialogClose, MatDialogContent} from "@angular/mater
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
+import {ListIngredientsComponent} from "../list-ingredients/list-ingredients.components";
 
 @Component({
     selector: 'app-form-recipe-dialog',
@@ -16,7 +17,8 @@ import {MatButtonModule} from "@angular/material/button";
         MatDialogActions,
         MatDialogClose,
         MatInputModule,
-        MatButtonModule
+        MatButtonModule,
+        ListIngredientsComponent
     ],
     templateUrl: './form-recipe-dialog.component.html',
     styleUrl: './form-recipe-dialog.component.scss'
