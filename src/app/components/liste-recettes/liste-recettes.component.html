@@ -6,6 +6,16 @@
                 <mat-icon>add</mat-icon>
             </button>
         </mat-card-header>
+        <mat-card-content>
+            <div class="recipe-container">
+                <app-recipe
+                    *ngFor="let recipe of recipes"
+                    [name]="recipe.name"
+                    [description]="recipe.description"
+                >
+                </app-recipe>
+            </div>
+        </mat-card-content>
     </mat-card>
 </div>
 

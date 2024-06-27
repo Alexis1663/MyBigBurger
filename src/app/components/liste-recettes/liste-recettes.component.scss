@@ -7,12 +7,12 @@
 }
 
 .card {
-    width: 50%;
+    width: 70%;
 }
 
 .card-header {
-    display: flex; 
-    justify-content: space-between; 
+    display: flex;
+    justify-content: space-between;
     align-items: center;
     padding: 16px;
 }
@@ -20,3 +20,10 @@
 .button-add {
     background: #5DADE2;
 }
+
+.recipe-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 16px;
+}
+

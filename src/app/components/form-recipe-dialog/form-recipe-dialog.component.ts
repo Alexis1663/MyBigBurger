@@ -10,7 +10,7 @@ import {NgForOf, NgIf} from "@angular/common";
 import {FormIngredientComponent} from "../form-ingredient/form-ingredient.component";
 import {IngredientRecipe} from "../../core/models/ingredient-recipe";
 import {Ingredient} from "../../core/models/ingredient";
-import {RecipeServices} from "../../shared/services/recipe.services";
+import {RecipeServices} from "../../services/recipe.services";
 
 @Component({
     selector: 'app-form-recipe-dialog',
