@@ -19,7 +19,7 @@ export class ListeRecettesComponent {
     openDialog(): void {
         const dialogRef = this.dialog.open(FormRecipeDialogComponent, {
             width: '80%',
-            height: '80%',
+            height: 'auto',
         });
 
         dialogRef.afterClosed().subscribe(result => {

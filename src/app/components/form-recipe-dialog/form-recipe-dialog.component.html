@@ -4,20 +4,27 @@
         <form [formGroup]="formRecipe">
             <mat-form-field>
                 <mat-label>Nom</mat-label>
-                <input matInput formControlName="name" />
+                <input matInput formControlName="name"/>
+                <mat-error *ngIf="formRecipe.controls['name'].hasError('required')">Ce champs est
+                    <strong>obligatoire</strong></mat-error>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Description</mat-label>
-                <input matInput formControlName="description" />
+                <input matInput formControlName="description"/>
+                <mat-error *ngIf="formRecipe.controls['description'].hasError('required')">Ce champs est <strong>obligatoire</strong>
+                </mat-error>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Image</mat-label>
-                <input matInput formControlName="image" />
+                <input matInput formControlName="image"/>
+                <mat-error *ngIf="formRecipe.controls['image'].hasError('required')">Ce champs est
+                    <strong>obligatoire</strong></mat-error>
             </mat-form-field>
+            <app-form-ingredient (onAddIngredient)="addIngredient($event)"></app-form-ingredient>
+            <app-list-ingredients [ingredientRecipes]="ingredientRecipes"></app-list-ingredients>
         </form>
-        <app-list-ingredients></app-list-ingredients>
     </mat-dialog-content>
     <mat-dialog-actions>
-        <button mat-button>Ajouter</button>
+        <button mat-button (click)="addRecipe()">Ajouter</button>
     </mat-dialog-actions>
 </div>

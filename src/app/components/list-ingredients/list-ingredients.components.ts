@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, Input} from "@angular/core";
 import {
     MatCell,
     MatCellDef,
@@ -8,6 +8,9 @@ import {
     MatHeaderRowDef, MatRow, MatRowDef,
     MatTable
 } from "@angular/material/table";
+import {MatButton} from "@angular/material/button";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {IngredientRecipe} from "../../core/models/ingredient-recipe";
 
 @Component({
     selector: "app-list-ingredients",
@@ -24,16 +27,17 @@ import {
         MatHeaderRowDef,
         MatRowDef,
         MatHeaderRow,
-        MatRow
+        MatRow,
+        MatButton
     ]
 })
 export class ListIngredientsComponent {
 
-    displayedColumns: string[] = ['ingredient', 'quantity'];
-    dataSource = [
-        {
-            ingredient: 'Ingrédient 1',
-            quantity: 5
-        }
-    ]
+    displayedColumns: string[] = [
+        'ingredient',
+        'quantity'
+    ];
+
+    @Input() public ingredientRecipes: IngredientRecipe[] = [];
+
 }
