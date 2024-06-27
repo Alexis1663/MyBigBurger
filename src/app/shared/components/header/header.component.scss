@@ -41,3 +41,7 @@ a:hover::after {
 .home-link:hover::after {
     width: 0; /* Empêche l'extension de la ligne au survol */
 }
+
+.logout {
+    cursor: pointer;
+}

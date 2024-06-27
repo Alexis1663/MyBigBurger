@@ -1,4 +1,5 @@
 <div class="header">
     <a [routerLink]="['/home']" class="home-link"><img style="width: 40px;" src="../../../assets/Burger.jpeg"></a>
-    <a [routerLink]="['/liste-recettes']">Recettes</a>
+    <a [routerLink]="['/login']" *ngIf="!_authService.isLoggedIn()">Login</a>
+    <a *ngIf="_authService.isLoggedIn()" (click)="_authService.logout()" class="logout">Logout</a>
 </div>
