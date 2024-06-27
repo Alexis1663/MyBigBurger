@@ -17,6 +17,12 @@ export class RecipeServices {
     }
 
     public addRecipe(recipe: RecipeModel): void {
+        if(this._recipes.length > 0) {
+            let idMax: number = Math.max(...this._recipes.map(recipe => recipe.id));
+            recipe.id = idMax + 1;
+        }else {
+            recipe.id = 1;
+        }
         this._recipes.push(recipe);
         this.save();
     }
@@ -30,6 +36,10 @@ export class RecipeServices {
         if (recipes) {
             this._recipes = JSON.parse(recipes) as RecipeModel[];
         }
+    }
+
+    public getRecipeById(id: number): RecipeModel | undefined {
+        return this._recipes.find(recipe => recipe.id === id);
     }
 
 }

@@ -1,0 +1,13 @@
+<div *ngIf="recipe; else noRecipe">
+    <h1>
+        {{ recipe.name }}
+    </h1>
+    <span *ngIf="recipe.description">
+        {{ recipe.description.length > 50 ? (recipe.description | slice:0:50) + '...' : recipe.description }}
+    </span>
+</div>
+<ng-template #noRecipe>
+    <span>
+        Recette introuvable
+    </span>
+</ng-template>

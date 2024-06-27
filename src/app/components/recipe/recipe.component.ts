@@ -9,6 +9,7 @@ import {
 import {MatIcon} from '@angular/material/icon';
 import {MatButton, MatFabButton, MatMiniFabButton} from '@angular/material/button';
 import {NgForOf, NgIf, SlicePipe} from "@angular/common";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-recipe',
@@ -34,5 +35,14 @@ export class RecipeComponent {
 
     @Input() name: string | undefined;
     @Input() description: string | undefined;
+    @Input() id: number | undefined;
 
+    public constructor(
+        private readonly _router: Router
+    ) {
+    }
+
+    public redirectToRecipeDetail(): void {
+        this._router.navigate(['recette', this.id]).then();
+    }
 }

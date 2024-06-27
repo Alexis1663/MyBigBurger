@@ -6,10 +6,9 @@
     font-size: 25px;
     padding: 1rem;
     gap: 30px;
-    width: 100%;
+    max-width: 100%;
     z-index: 1000;
     top: 0;
-    position: fixed;
 }
 
 a {
@@ -35,7 +34,7 @@ a:hover::after {
 
 .home-link {
     text-decoration: none; /* Annule le soulignement par défaut */
-    color: white; 
+    color: white;
 }
 
 .home-link:hover::after {

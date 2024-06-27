@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { ListeRecettesComponent } from './components/liste-recettes/liste-recettes.component';
 import { LoginComponent } from './components/login/login.component';
+import {RecipeDetailComponent} from "./components/recipe-detail/recipe-detail.component";
 
 export const routes: Routes = [
     {
@@ -20,5 +21,9 @@ export const routes: Routes = [
     {
         path: 'liste-recettes',
         component: ListeRecettesComponent
+    },
+    {
+        path: 'recette/:id',
+        component: RecipeDetailComponent
     }
 ];
