@@ -1,0 +1,10 @@
+.action-container {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.action-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

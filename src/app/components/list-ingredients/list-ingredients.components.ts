@@ -11,6 +11,8 @@ import {
 import {MatButton} from "@angular/material/button";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {IngredientRecipe} from "../../core/models/ingredient-recipe";
+import {MatIcon} from "@angular/material/icon";
+import {RecipeServices} from "../../services/recipe.services";
 
 @Component({
     selector: "app-list-ingredients",
@@ -28,16 +30,27 @@ import {IngredientRecipe} from "../../core/models/ingredient-recipe";
         MatRowDef,
         MatHeaderRow,
         MatRow,
-        MatButton
+        MatButton,
+        MatIcon
     ]
 })
 export class ListIngredientsComponent {
 
     displayedColumns: string[] = [
         'ingredient',
-        'quantity'
+        'quantity',
+        'delete'
     ];
 
     @Input() public ingredientRecipes: IngredientRecipe[] = [];
+
+    public constructor(
+        private readonly _recipeService: RecipeServices
+    ) {
+    }
+
+    public removeIngredient(ingredient: IngredientRecipe): void {
+
+    }
 
 }

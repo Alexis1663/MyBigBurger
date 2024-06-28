@@ -4,38 +4,36 @@ import {
     MatCardActions,
     MatCardContent,
     MatCardHeader,
+    MatCardSubtitle,
     MatCardTitle
 } from '@angular/material/card';
-import {MatIcon} from '@angular/material/icon';
-import {MatButton, MatFabButton, MatMiniFabButton} from '@angular/material/button';
-import {NgForOf, NgIf, SlicePipe} from "@angular/common";
+import {MatButton} from '@angular/material/button';
+import {NgIf, SlicePipe} from "@angular/common";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-recipe',
-  standalone: true,
+    selector: 'app-recipe',
+    standalone: true,
     imports: [
-        MatCard,
         MatCardHeader,
-        MatIcon,
+        MatCard,
         MatCardContent,
-        SlicePipe,
-        NgIf,
         MatCardTitle,
-        MatMiniFabButton,
-        NgForOf,
+        MatCardSubtitle,
         MatCardActions,
+        SlicePipe,
         MatButton,
-        MatFabButton
+        NgIf
     ],
-  templateUrl: './recipe.component.html',
-  styleUrl: './recipe.component.scss'
+    templateUrl: './recipe.component.html',
+    styleUrl: './recipe.component.scss'
 })
 export class RecipeComponent {
 
     @Input() name: string | undefined;
     @Input() description: string | undefined;
     @Input() id: number | undefined;
+    @Input() image: string | undefined;
 
     public constructor(
         private readonly _router: Router

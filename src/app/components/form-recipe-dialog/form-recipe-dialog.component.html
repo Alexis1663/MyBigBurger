@@ -14,12 +14,9 @@
                 <mat-error *ngIf="formRecipe.controls['description'].hasError('required')">Ce champs est <strong>obligatoire</strong>
                 </mat-error>
             </mat-form-field>
-            <mat-form-field>
-                <mat-label>Image</mat-label>
-                <input matInput formControlName="image"/>
-                <mat-error *ngIf="formRecipe.controls['image'].hasError('required')">Ce champs est
-                    <strong>obligatoire</strong></mat-error>
-            </mat-form-field>
+
+            <input (change)="fileUpload($event)" type="file"/>
+
             <app-form-ingredient (onAddIngredient)="addIngredient($event)"></app-form-ingredient>
             <app-list-ingredients [ingredientRecipes]="ingredientRecipes"></app-list-ingredients>
         </form>

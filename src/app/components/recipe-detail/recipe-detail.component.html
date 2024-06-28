@@ -1,10 +1,16 @@
 <div *ngIf="recipe; else noRecipe">
+    <img [src]="recipe.image" alt="Image de la recette" />
     <h1>
         {{ recipe.name }}
     </h1>
     <span *ngIf="recipe.description">
         {{ recipe.description.length > 50 ? (recipe.description | slice:0:50) + '...' : recipe.description }}
     </span>
+    <div *ngFor="let ingredient of recipe.ingredients">
+        <span>
+            {{ ingredient.name }}
+        </span>
+    </div>
 </div>
 <ng-template #noRecipe>
     <span>

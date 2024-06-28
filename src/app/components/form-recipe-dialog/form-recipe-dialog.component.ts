@@ -38,14 +38,14 @@ export class FormRecipeDialogComponent {
     private readonly _dialogRef: MatDialogRef<FormRecipeDialogComponent> = inject(MatDialogRef<FormRecipeDialogComponent>);
 
     public get ingredientRecipes(): IngredientRecipe[] {
-        return this.formRecipe.controls['ingredientRecipes'].value;
+        return this.formRecipe.controls['ingredients'].value;
     }
 
     public formRecipe: FormGroup = new FormGroup({
         name: new FormControl(null, Validators.required),
         description: new FormControl(null, Validators.required),
         image: new FormControl(null, Validators.required),
-        ingredientRecipes: new FormControl([], Validators.required),
+        ingredients: new FormControl([], Validators.required),
     });
 
     public constructor(
@@ -55,15 +55,32 @@ export class FormRecipeDialogComponent {
 
 
     public addIngredient(ingredientRecipe: IngredientRecipe): void {
-        this.formRecipe.controls['ingredientRecipes'].setValue([...this.formRecipe.controls['ingredientRecipes'].value, ingredientRecipe]);
+        this.formRecipe.controls['ingredients'].setValue([...this.formRecipe.controls['ingredients'].value, ingredientRecipe]);
+    }
+
+    public fileUpload(event: Event): void {
+        if(!event.target) return;
+        let input: HTMLInputElement = event.target as HTMLInputElement;
+        if(input) {
+            let fileList: FileList | null = input.files;
+            if (fileList) {
+                const file: File = fileList[0];
+                const reader = new FileReader();
+                reader.onload = () => {
+                    const base64String = reader.result as string;
+                    this.formRecipe.controls['image'].setValue(base64String);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
     }
 
     public addRecipe(): void {
         if (this.formRecipe.valid) {
-            let ingredients: Ingredient[] = this.formRecipe.controls['ingredientRecipes'].value.map((ingredientRecipe: IngredientRecipe) => {
+            let ingredients: Ingredient[] = this.formRecipe.controls['ingredients'].value.map((ingredientRecipe: IngredientRecipe) => {
                 return ingredientRecipe.ingredient;
             });
-            this.formRecipe.controls['ingredientRecipes'].setValue(ingredients);
+            this.formRecipe.controls['ingredients'].setValue(ingredients);
             this._recipeServices.addRecipe(this.formRecipe.value);
             this.formRecipe.reset();
             this._dialogRef.close();

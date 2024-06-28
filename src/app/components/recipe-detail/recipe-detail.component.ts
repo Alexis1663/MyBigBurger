@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {RecipeModel} from "../../core/models/recipe.model";
-import {NgIf, SlicePipe} from "@angular/common";
+import {NgForOf, NgIf, SlicePipe} from "@angular/common";
 import {ActivatedRoute} from "@angular/router";
 import {RecipeServices} from "../../services/recipe.services";
 
@@ -9,7 +9,8 @@ import {RecipeServices} from "../../services/recipe.services";
     standalone: true,
     imports: [
         NgIf,
-        SlicePipe
+        SlicePipe,
+        NgForOf
     ],
     templateUrl: './recipe-detail.component.html',
     styleUrl: './recipe-detail.component.scss'
