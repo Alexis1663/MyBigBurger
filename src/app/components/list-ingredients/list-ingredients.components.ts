@@ -1,4 +1,4 @@
-import {Component, Input} from "@angular/core";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {
     MatCell,
     MatCellDef,
@@ -13,6 +13,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {IngredientRecipe} from "../../core/models/ingredient-recipe";
 import {MatIcon} from "@angular/material/icon";
 import {RecipeServices} from "../../services/recipe.services";
+import {identity} from "rxjs";
 
 @Component({
     selector: "app-list-ingredients",
@@ -36,21 +37,18 @@ import {RecipeServices} from "../../services/recipe.services";
 })
 export class ListIngredientsComponent {
 
-    displayedColumns: string[] = [
+    public displayedColumns: string[] = [
         'ingredient',
         'quantity',
         'delete'
     ];
 
     @Input() public ingredientRecipes: IngredientRecipe[] = [];
+    @Output() public ingredientRecipesChange: EventEmitter<IngredientRecipe[]> = new EventEmitter<IngredientRecipe[]>();
 
-    public constructor(
-        private readonly _recipeService: RecipeServices
-    ) {
-    }
-
-    public removeIngredient(ingredient: IngredientRecipe): void {
-
+    public removeIngredient(idIngredient: number): void {
+        this.ingredientRecipes = this.ingredientRecipes.filter((i: IngredientRecipe): boolean => i.id !== idIngredient);
+        this.ingredientRecipesChange.emit(this.ingredientRecipes);
     }
 
 }

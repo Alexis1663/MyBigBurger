@@ -18,7 +18,7 @@
             <input (change)="fileUpload($event)" type="file"/>
 
             <app-form-ingredient (onAddIngredient)="addIngredient($event)"></app-form-ingredient>
-            <app-list-ingredients [ingredientRecipes]="ingredientRecipes"></app-list-ingredients>
+            <app-list-ingredients [(ingredientRecipes)]="ingredientRecipes"></app-list-ingredients>
         </form>
     </mat-dialog-content>
     <mat-dialog-actions>

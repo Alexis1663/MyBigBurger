@@ -10,10 +10,10 @@
     </ng-container>
 
     <ng-container matColumnDef="delete">
-        <th mat-header-cell *matHeaderCellDef></th>
+        <th mat-header-cell *matHeaderCellDef>Action</th>
         <td class="action-container" mat-cell *matCellDef="let element">
             <div class="action-button">
-                <button mat-button>Supprimer</button>
+                <button mat-button (click)="removeIngredient(element.id)">Supprimer</button>
             </div>
         </td>
     </ng-container>
