@@ -5,7 +5,7 @@ import {routes} from './app.routes';
 import {provideClientHydration} from '@angular/platform-browser';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 import {MAT_DIALOG_DEFAULT_OPTIONS} from "@angular/material/dialog";
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -16,6 +16,6 @@ export const appConfig: ApplicationConfig = {
             provide: MAT_DIALOG_DEFAULT_OPTIONS,
             useValue: {hasBackdrop: false}
         }, provideAnimationsAsync(),
-        provideHttpClient()
+        provideHttpClient(withFetch())
     ],
 };

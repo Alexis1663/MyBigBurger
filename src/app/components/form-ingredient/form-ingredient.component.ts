@@ -67,6 +67,8 @@ export class FormIngredientComponent {
         if(this.formIngredient.valid) {
             this.onAddIngredient.emit(this.formIngredient.value);
             this.formIngredient.reset();
+        } else {
+            this.formIngredient.markAllAsTouched();
         }
     }
 }

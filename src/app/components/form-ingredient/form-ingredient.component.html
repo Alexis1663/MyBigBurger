@@ -6,16 +6,23 @@
                 {{ ingredient.name }}
             </mat-option>
         </mat-select>
-        <mat-error *ngIf="formIngredient.controls['ingredient'].hasError('required')">Ce champs est <strong>obligatoire</strong></mat-error>
+        <mat-error *ngIf="formIngredient.get('ingredient')?.touched && formIngredient.get('ingredient')?.hasError('required')">
+            Ce champ est <strong>obligatoire</strong>
+        </mat-error>
     </mat-form-field>
     <mat-form-field>
         <mat-label>Quantité</mat-label>
         <input matInput formControlName="quantity"/>
-        <mat-error *ngIf="formIngredient.controls['ingredient'].hasError('required')">Ce champs est <strong>obligatoire</strong></mat-error>
-        <mat-error *ngIf="formIngredient.controls['quantity'].hasError('pattern')">La quantité saisie doit être un <strong>nombre</strong></mat-error>
+        <mat-error *ngIf="formIngredient.get('quantity')?.touched && formIngredient.get('quantity')?.hasError('required')">
+            Ce champ est <strong>obligatoire</strong>
+        </mat-error>
+        <mat-error *ngIf="formIngredient.get('quantity')?.touched && formIngredient.get('quantity')?.hasError('pattern')">
+            La quantité saisie doit être un <strong>nombre</strong>
+        </mat-error>
     </mat-form-field>
 
     <button mat-icon-button type="submit">
         <mat-icon>add</mat-icon>
     </button>
 </form>
+

@@ -11,10 +11,8 @@
 
     <ng-container matColumnDef="delete">
         <th mat-header-cell *matHeaderCellDef>Action</th>
-        <td class="action-container" mat-cell *matCellDef="let element">
-            <div class="action-button">
-                <button mat-button (click)="removeIngredient(element.id)">Supprimer</button>
-            </div>
+        <td mat-cell *matCellDef="let element">
+            <button class="button-delete" mat-button (click)="removeIngredient(element.id)">Supprimer</button>
         </td>
     </ng-container>
 

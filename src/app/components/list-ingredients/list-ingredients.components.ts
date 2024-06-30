@@ -15,6 +15,7 @@ import {MatIcon} from "@angular/material/icon";
 import {RecipeServices} from "../../services/recipe.services";
 import {identity} from "rxjs";
 
+
 @Component({
     selector: "app-list-ingredients",
     templateUrl: "./list-ingredients.components.html",
