@@ -2,7 +2,7 @@
     <mat-form-field>
         <mat-label>Select</mat-label>
         <mat-select formControlName="ingredient">
-            <mat-option *ngFor="let ingredient of choiceIngredients" [value]="ingredient">
+            <mat-option *ngFor="let ingredient of choiceIngredients$ | async" [value]="ingredient">
                 {{ ingredient.name }}
             </mat-option>
         </mat-select>

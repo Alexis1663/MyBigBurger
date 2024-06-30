@@ -1,19 +1,38 @@
-<div *ngIf="recipe; else noRecipe">
-    <img [src]="recipe.image" alt="Image de la recette" />
-    <h1>
-        {{ recipe.name }}
-    </h1>
-    <span *ngIf="recipe.description">
-        {{ recipe.description.length > 50 ? (recipe.description | slice:0:50) + '...' : recipe.description }}
-    </span>
-    <div *ngFor="let ingredient of recipe.ingredients">
-        <span>
-            {{ ingredient.name }}
-        </span>
+<div class="container" *ngIf="recipe; else noRecipe">
+    <mat-card class="recipe-card">
+      <img mat-card-image class="recipe-image" [src]="recipe.image" alt="Image de la recette">
+      <mat-card-content>
+        <h1 mat-card-title>{{ recipe.name }}</h1>
+        <p class="description" *ngIf="recipe.description">
+          {{ recipe.description.length > 50 ? (recipe.description | slice:0:50) + '...' : recipe.description }}
+        </p>
+        
+        <mat-table *ngIf="recipe.ingredients && recipe.ingredients.length > 0" class="ingredient-table" matSort [dataSource]="recipe.ingredients">
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+            <mat-cell *matCellDef="let ingredient"> {{ ingredient.name }} </mat-cell>
+          </ng-container>
+  
+          <!-- Description Column -->
+          <ng-container matColumnDef="description">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
+            <mat-cell *matCellDef="let ingredient"> {{ ingredient.description }} </mat-cell>
+          </ng-container>
+  
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+  
+        <div class="no-ingredients" *ngIf="!recipe.ingredients || recipe.ingredients.length === 0">
+          Aucun ingrédient disponible.
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  
+  <ng-template #noRecipe>
+    <div class="no-recipe-message">
+      <span>Recette introuvable</span>
     </div>
-</div>
-<ng-template #noRecipe>
-    <span>
-        Recette introuvable
-    </span>
-</ng-template>
+  </ng-template>

@@ -101,5 +101,4 @@ export class FormRecipeDialogComponent {
             this._dialogRef.close();
         }
     }
-
 }

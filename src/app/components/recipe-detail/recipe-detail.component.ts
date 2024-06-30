@@ -3,6 +3,8 @@ import {RecipeModel} from "../../core/models/recipe.model";
 import {NgForOf, NgIf, SlicePipe} from "@angular/common";
 import {ActivatedRoute} from "@angular/router";
 import {RecipeServices} from "../../services/recipe.services";
+import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
 
 @Component({
     selector: 'app-recipe-detail',
@@ -10,7 +12,9 @@ import {RecipeServices} from "../../services/recipe.services";
     imports: [
         NgIf,
         SlicePipe,
-        NgForOf
+        NgForOf,
+        MatCardModule,
+        MatTableModule
     ],
     templateUrl: './recipe-detail.component.html',
     styleUrl: './recipe-detail.component.scss'
@@ -18,6 +22,7 @@ import {RecipeServices} from "../../services/recipe.services";
 export class RecipeDetailComponent implements OnInit {
 
     public recipe: RecipeModel | undefined;
+    displayedColumns: string[] = ['name', 'description'];
 
     public constructor(
         private readonly _route: ActivatedRoute,
