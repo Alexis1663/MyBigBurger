@@ -42,6 +42,14 @@ export class FormIngredientComponent implements OnInit {
     @Output() public onAddIngredient: EventEmitter<DisplayIngredient> = new EventEmitter<DisplayIngredient>();
     public choiceIngredients$: Observable<Ingredient[]> = new Observable<Ingredient[]>();
 
+    public formIngredient: FormGroup = new FormGroup({
+        ingredient: new FormControl(null, Validators.required),
+        quantity: new FormControl(null, [
+            Validators.required,
+            Validators.pattern(/^[0-9]+$/)
+        ]),
+    });
+
     constructor(
         private readonly _ingredientService: IngredientService
     ) {
@@ -54,14 +62,6 @@ export class FormIngredientComponent implements OnInit {
     private initChoiceIngredients(): void {
         this.choiceIngredients$ = this._ingredientService.ingredients$;
     }
-
-    public formIngredient: FormGroup = new FormGroup({
-        ingredient: new FormControl(null, Validators.required),
-        quantity: new FormControl(null, [
-            Validators.required,
-            Validators.pattern(/^[0-9]+$/)
-        ]),
-    });
 
     public addIngredient(): void {
         if(this.formIngredient.valid) {

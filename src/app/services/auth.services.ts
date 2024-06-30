@@ -11,7 +11,7 @@ export class AuthService {
         private readonly _router: Router
     ) {}
 
-    login(email: string, password: string): boolean {
+    public login(email: string, password: string): boolean {
         if (email && password) {
             this._cookieService.set('isAdmin', 'true');
             return true;
@@ -19,13 +19,13 @@ export class AuthService {
         return false;
     }
 
-    isLoggedIn(): boolean {
+    public isLoggedIn(): boolean {
         return (
             this._cookieService.check('isAdmin')
         );
     }
 
-    logout(): void {
+    public logout(): void {
         this._cookieService.delete('isAdmin');
         this._router.navigate(['/home']);
     }

@@ -6,7 +6,7 @@ import {OrderRecipeComponent} from '../order-recipe/order-recipe.component';
 import {RecipeModel} from '../../core/models/recipe.model';
 import {OrderService} from '../../services/order.service';
 import {CommonModule} from '@angular/common';
-import {MatTableModule} from '@angular/material/table';
+import {MatTable, MatTableModule} from '@angular/material/table';
 
 @Component({
     selector: 'app-home',
@@ -16,22 +16,20 @@ import {MatTableModule} from '@angular/material/table';
         MatButtonModule,
         OrderRecipeComponent,
         CommonModule,
-        MatTableModule
+        MatTableModule,
+        MatTable
     ],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'
 })
 export class HomeComponent {
 
-    public displayedColumns: string[] = ['name', 'description'];
-
     constructor(
         private readonly _router: Router,
-        public readonly orderService: OrderService
     ) {
     }
 
-    public redirectToListeRecettes() {
+    public redirectToListeRecettes(): void {
         this._router.navigate(['/liste-recettes']).then();
     }
 }

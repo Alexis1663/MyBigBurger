@@ -49,6 +49,7 @@ export class FormRecipeDialogComponent {
         image: new FormControl(null, Validators.required),
         ingredients: new FormControl([], Validators.required),
     });
+
     private readonly _dialogRef: MatDialogRef<FormRecipeDialogComponent> = inject(MatDialogRef<FormRecipeDialogComponent>);
 
     public get ingredientRecipes(): DisplayIngredient[] {
