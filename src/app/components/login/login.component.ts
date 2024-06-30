@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatError, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AuthService } from '../../services/auth.services';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit{
 
   constructor(
     private readonly _fb: FormBuilder,
-    private readonly _authService: AuthService
+    private readonly _authService: AuthService,
+    private readonly _router: Router
   ) {}
 
   ngOnInit(): void {
@@ -32,6 +34,7 @@ export class LoginComponent implements OnInit{
     const { email, password } = this.loginForm.value;
     if (this._authService.login(email, password)) {
       console.log('Logged in successfully!');
+      this._router.navigate(['/liste-ingredients']);
     } else {
       console.log('Login failed!');
     }

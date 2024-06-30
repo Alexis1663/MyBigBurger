@@ -1,0 +1,44 @@
+<div class="form-container">
+    <div class="ingredient-form">
+        <h3>Ajouter un nouvel ingrédient</h3>
+        <form [formGroup]="ingredientForm" (ngSubmit)="onAddIngredient()">
+          <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name">
+            <mat-error *ngIf="ingredientForm.get('name')?.hasError('required')">
+                Le champ ne doit pas être vide
+            </mat-error>
+          </mat-form-field>
+          <button mat-raised-button class="button-add" type="submit">Ajouter</button>
+        </form>
+    </div>
+</div>
+
+
+<div class="table">
+    <h1>Liste des ingrédients</h1>
+    <hr style="width: 99%; border: 1px solid #000;">
+    <table mat-table [dataSource]="ingredients">
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> ID </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+        
+        
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let element">
+            <button mat-button class="button-modify" (click)="onEditIngredient(element)">Modifier</button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+    </table>
+</div>
+

@@ -1,0 +1,55 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+
+    .ingredient-form {
+        margin-bottom: 20px;
+        padding: 20px;
+        background: #f7f7f7;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        width: 50%;
+        align-self: center;
+      
+        h3 {
+          margin-bottom: 15px;
+          font-size: 1.5rem;
+          color: #333;
+        }
+      
+        form {
+          display: flex;
+          flex-direction: column;
+          
+          mat-form-field {
+            margin-bottom: 15px;
+          }
+      
+          button {
+            align-self: center;
+          }
+        }
+    }
+}
+
+.button-add {
+    background: #5DADE2 !important;
+    color: white !important;
+}
+
+.button-modify {
+    background: #5DADE2 !important;
+    color: white !important;
+
+}
+
+.table {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}

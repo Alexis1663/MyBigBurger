@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {AuthService} from "../../../services/auth.services";
@@ -16,5 +16,10 @@ import {AuthService} from "../../../services/auth.services";
 export class HeaderComponent {
   constructor(
     public readonly _authService: AuthService,
+    private readonly cdr: ChangeDetectorRef
   ) {}
+
+  ngAfterContentChecked() {
+    this.cdr.markForCheck();
+  }
 }
