@@ -18,6 +18,7 @@ import {Ingredient} from "../../core/models/ingredient";
 import {IngredientService} from "../../services/ingredient.service";
 import {DisplayIngredient} from "../../dto/display-ingredient";
 
+
 @Component({
     selector: "app-list-ingredients",
     templateUrl: "./list-ingredients.components.html",

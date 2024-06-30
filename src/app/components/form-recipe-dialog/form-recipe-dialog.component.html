@@ -15,7 +15,7 @@
                 </mat-error>
             </mat-form-field>
 
-            <input (change)="fileUpload($event)" type="file"/>
+            <input (change)="fileUpload($event)" type="file" class="file"/>
 
             <app-form-ingredient (onAddIngredient)="addIngredient($event)"></app-form-ingredient>
             <app-list-ingredients [(ingredientRecipes)]="ingredientRecipes"></app-list-ingredients>

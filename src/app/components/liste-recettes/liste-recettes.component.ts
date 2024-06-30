@@ -30,11 +30,11 @@ export class ListeRecettesComponent {
     private readonly _dialog: MatDialog = inject(MatDialog);
 
     paginatedRecipes: RecipeModel[] = [];
-    pageSize: number = 3;
+    pageSize: number = 4;
     pageIndex: number = 0;
     recipesSubscription!: Subscription;
 
-    @ViewChild(MatPaginator) paginator!: MatPaginator;
+    @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
     public get recipes(): RecipeModel[] {
         return this._recipeService.recipes;
@@ -46,14 +46,14 @@ export class ListeRecettesComponent {
     ) {}
 
     ngOnInit() {
-        this.recipesSubscription = this._recipeService.recipes$.subscribe(
-          (recipes) => {
-            this.updatePaginatedRecipes();
-          },
-          (error) => {
-            console.error('Error fetching recipes:', error);
-          }
-        );
+      this.recipesSubscription = this._recipeService.recipes$.subscribe({
+        next: () => {
+          this.updatePaginatedRecipes();
+        },
+        error: (error) => {
+          console.error('Error fetching recipes:', error);
+        }
+      });
     }
 
     ngAfterViewInit() {

@@ -1,28 +1,28 @@
-<div class="card-container">
-    <mat-card class="card" appearance="outlined">
-        <mat-card-header class="card-header">
-            <mat-card-title>Liste de recettes</mat-card-title>
-            <button mat-mini-fab class="button-add" (click)="openDialog()">
-                <mat-icon>add</mat-icon>
-            </button>
-        </mat-card-header>
-        <mat-card-content>
-            <div class="recipe-container">
-                <app-recipe
-                    *ngFor="let recipe of paginatedRecipes"
-                    [name]="recipe.name"
-                    [description]="recipe.description"
-                    [id]="recipe.id"
-                    [image]="recipe.image"
-                >
-                </app-recipe>
-            </div>
-        </mat-card-content>
-        <mat-paginator 
-            [length]="recipes.length"
-            [pageSize]="pageSize"
-            (page)="updatePaginatedRecipes($event)">
-        </mat-paginator>
-    </mat-card>
+<div class="main-container">
+    <div class="card-container">
+        <mat-card class="card" appearance="outlined">
+            <mat-card-header class="card-header">
+                <mat-card-title>Liste de recettes</mat-card-title>
+                <button mat-mini-fab class="button-add" (click)="openDialog()">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="recipe-container">
+                    <app-recipe
+                        *ngFor="let recipe of paginatedRecipes"
+                        [name]="recipe.name"
+                        [description]="recipe.description"
+                        [id]="recipe.id"
+                        [image]="recipe.image">
+                    </app-recipe>
+                </div>
+            </mat-card-content>
+            <mat-paginator
+                [length]="recipes.length"
+                [pageSize]="pageSize"
+                (page)="updatePaginatedRecipes($event)">
+            </mat-paginator>
+        </mat-card>
+    </div>
 </div>
-
