@@ -1,6 +1,6 @@
 .home {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -12,4 +12,13 @@
 
 .button-add {
     background: #5DADE2;
+}
+
+.landing-container {
+    flex: 3;
+}
+
+.order-container {
+    flex: 2;
+    padding: 16px;
 }

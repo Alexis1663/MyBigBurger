@@ -30,7 +30,7 @@ export class ListeRecettesComponent {
     private readonly _dialog: MatDialog = inject(MatDialog);
 
     paginatedRecipes: RecipeModel[] = [];
-    pageSize: number = 3;
+    pageSize: number = 4;
     pageIndex: number = 0;
     recipesSubscription!: Subscription;
 
