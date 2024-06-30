@@ -9,6 +9,13 @@
                 Le champ ne doit pas être vide
             </mat-error>
           </mat-form-field>
+          <mat-form-field>
+            <mat-label>Description</mat-label>
+            <input matInput formControlName="description">
+            <mat-error *ngIf="ingredientForm.get('description')?.hasError('required')">
+                Le champ ne doit pas être vide
+            </mat-error>
+          </mat-form-field>
           <button mat-raised-button class="button-add" type="submit">Ajouter</button>
         </form>
     </div>
@@ -24,10 +31,14 @@
             <td mat-cell *matCellDef="let element"> {{element.id}} </td>
         </ng-container>
         
-        
         <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef> Name </th>
             <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
         </ng-container>
 
         <ng-container matColumnDef="actions">

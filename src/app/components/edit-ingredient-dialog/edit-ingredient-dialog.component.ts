@@ -27,7 +27,8 @@ export class EditIngredientDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.editForm = this.fb.group({
-      name: [data.name, Validators.required]
+      name: [data.name, Validators.required],
+      description: [data.description, Validators.required]
     });
   }
 

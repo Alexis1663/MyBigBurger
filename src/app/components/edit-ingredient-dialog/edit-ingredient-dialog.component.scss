@@ -5,6 +5,11 @@
     align-items: center;
 }
 
+.editForm {
+    display: flex;
+    flex-direction: column;
+}
+
 .button-save {
     background: #5DADE2 !important;
     color: white !important;

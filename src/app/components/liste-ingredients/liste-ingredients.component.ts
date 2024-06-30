@@ -8,7 +8,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { EditIngredientDialogComponent } from '../edit-ingredient-dialog/edit-ingredient-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { IngredientService } from '../../services/ingredient.service';
+import { HttpClientModule } from '@angular/common/http';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-liste-ingredients',
@@ -20,41 +23,60 @@ import { Component } from '@angular/core';
     MatButtonModule,
     MatError,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    HttpClientModule
   ],
   templateUrl: './liste-ingredients.component.html',
   styleUrl: './liste-ingredients.component.scss'
 })
-export class ListeIngredientsComponent {
-  ingredients = INGREDIENTS;
-  columnsToDisplay = ['id', 'name', 'actions'];
+export class ListeIngredientsComponent implements OnInit{
+  // ingredients = INGREDIENTS;
+  ingredients: Ingredient[] = [];
+  private ingredientsSubscription!: Subscription;
+  columnsToDisplay = ['id', 'name', 'description', 'actions'];
   ingredientForm: FormGroup;
-  isEditMode = false;
-  editedIngredientIndex: number | null = null;
 
   constructor(
     private readonly fb: FormBuilder,
     private readonly dialog: MatDialog,
+    private readonly _ingredientService: IngredientService,
   ) {
     this.ingredientForm = this.fb.group({
-      name: ['', Validators.required]
+      name: ['', Validators.required],
+      description: ['', Validators.required]
     });
+  }
+
+  ngOnInit(): void {
+    this.ingredientsSubscription = this._ingredientService.ingredients$.subscribe({
+      next: (ingredients) => {
+        this.ingredients = ingredients;
+      },
+      error: (error) => {
+        console.dir(error);
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.ingredientsSubscription.unsubscribe();
   }
 
   onAddIngredient() {
     const newIngredient: Ingredient = {
       id: this.ingredients.length + 1,
-      name: this.ingredientForm.value.name
+      name: this.ingredientForm.value.name,
+      description: this.ingredientForm.value.description
     };
 
-    if (this.isEditMode && this.editedIngredientIndex !== null) {
-      this.ingredients[this.editedIngredientIndex] = newIngredient;
-      this.isEditMode = false;
-      this.editedIngredientIndex = null;
-    } else {
-      this.ingredients.push(newIngredient);
-      console.dir(this.ingredients);
-    }
+    this._ingredientService.add(newIngredient).subscribe((addIngredient) => {
+      if(addIngredient) {
+        console.dir("Ingrédient ajouté avec succès !");
+      } else {
+        console.dir("Erreur lors de l'ajout de l'ingrédient !");
+      }
+    });
+
     this.ingredientForm.reset();
   }
 
@@ -68,7 +90,10 @@ export class ListeIngredientsComponent {
       if (result) {
         const index = this.ingredients.findIndex(item => item.id === ingredient.id);
         if (index !== -1) {
-          this.ingredients[index].name = result.name;
+          console.dir(ingredient.id);
+          this._ingredientService.update(ingredient.id, result).subscribe((updatedIngredient) => {
+            this.ingredients[index] = updatedIngredient;
+          });
         }
       }
     });
