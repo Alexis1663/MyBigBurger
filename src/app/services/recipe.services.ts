@@ -31,7 +31,7 @@ export class RecipeServices {
         localStorage.setItem('recipes', JSON.stringify(this._recipes));
     }
 
-    private load(): void {
+    public load(): void {
         const recipes: string | null = localStorage.getItem('recipes');
         if (recipes) {
             this._recipes = JSON.parse(recipes) as RecipeModel[];

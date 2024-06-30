@@ -9,7 +9,7 @@
         <mat-card-content>
             <div class="recipe-container">
                 <app-recipe
-                    *ngFor="let recipe of recipes"
+                    *ngFor="let recipe of paginatedRecipes"
                     [name]="recipe.name"
                     [description]="recipe.description"
                     [id]="recipe.id"
@@ -18,6 +18,11 @@
                 </app-recipe>
             </div>
         </mat-card-content>
+        <mat-paginator 
+            [length]="recipes.length"
+            [pageSize]="pageSize"
+            (page)="updatePaginatedRecipes($event)">
+        </mat-paginator>
     </mat-card>
 </div>
 
