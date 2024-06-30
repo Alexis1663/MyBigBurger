@@ -1,5 +1,6 @@
 import {Injectable} from "@angular/core";
 import {RecipeModel} from "../core/models/recipe.model";
+import { BehaviorSubject, Observable } from "rxjs";
 
 @Injectable({
     providedIn: 'root',
@@ -7,6 +8,7 @@ import {RecipeModel} from "../core/models/recipe.model";
 export class RecipeServices {
 
     public _recipes: RecipeModel[] = [];
+    private _recipesSubject: BehaviorSubject<RecipeModel[]> = new BehaviorSubject<RecipeModel[]>([]);
 
     public get recipes(): RecipeModel[] {
         return this._recipes;
@@ -14,6 +16,10 @@ export class RecipeServices {
 
     public constructor() {
         this.load();
+    }
+
+    public get recipes$(): Observable<RecipeModel[]> {
+        return this._recipesSubject.asObservable();
     }
 
     public addRecipe(recipe: RecipeModel): void {
@@ -24,6 +30,7 @@ export class RecipeServices {
             recipe.id = 1;
         }
         this._recipes.push(recipe);
+        this._recipesSubject.next(this._recipes);
         this.save();
     }
 
@@ -36,6 +43,7 @@ export class RecipeServices {
         if (recipes) {
             this._recipes = JSON.parse(recipes) as RecipeModel[];
         }
+        this._recipesSubject.next(this._recipes);
     }
 
     public getRecipeById(id: number): RecipeModel | undefined {

@@ -22,7 +22,7 @@ import { MatTableModule } from '@angular/material/table';
 export class RecipeDetailComponent implements OnInit {
 
     public recipe: RecipeModel | undefined;
-    displayedColumns: string[] = ['name', 'description'];
+    displayedColumns: string[] = ['name', 'description', 'quantity'];
 
     public constructor(
         private readonly _route: ActivatedRoute,

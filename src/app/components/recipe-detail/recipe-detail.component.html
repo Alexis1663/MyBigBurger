@@ -8,16 +8,19 @@
         </p>
         
         <mat-table *ngIf="recipe.ingredients && recipe.ingredients.length > 0" class="ingredient-table" matSort [dataSource]="recipe.ingredients">
-          <!-- Name Column -->
           <ng-container matColumnDef="name">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
             <mat-cell *matCellDef="let ingredient"> {{ ingredient.name }} </mat-cell>
           </ng-container>
   
-          <!-- Description Column -->
           <ng-container matColumnDef="description">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
             <mat-cell *matCellDef="let ingredient"> {{ ingredient.description }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="quantity">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Quantité </mat-header-cell>
+            <mat-cell *matCellDef="let ingredient"> {{ ingredient.quantity }} </mat-cell>
           </ng-container>
   
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

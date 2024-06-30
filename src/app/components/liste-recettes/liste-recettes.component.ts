@@ -9,6 +9,7 @@ import {RecipeModel} from "../../core/models/recipe.model";
 import {RecipeComponent} from "../recipe/recipe.component";
 import {NgForOf} from "@angular/common";
 import {MatPaginator, MatPaginatorModule, PageEvent} from '@angular/material/paginator';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-liste-recettes',
@@ -31,6 +32,7 @@ export class ListeRecettesComponent {
     paginatedRecipes: RecipeModel[] = [];
     pageSize: number = 3;
     pageIndex: number = 0;
+    recipesSubscription!: Subscription;
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -44,13 +46,24 @@ export class ListeRecettesComponent {
     ) {}
 
     ngOnInit() {
-        this._recipeService.load();
+        this.recipesSubscription = this._recipeService.recipes$.subscribe(
+          (recipes) => {
+            this.updatePaginatedRecipes();
+          },
+          (error) => {
+            console.error('Error fetching recipes:', error);
+          }
+        );
     }
 
     ngAfterViewInit() {
         this.updatePaginatedRecipes();
         this.cdr.detectChanges();
         this.paginator.page.subscribe(() => this.updatePaginatedRecipes());
+    }
+
+    ngOnDestroy(): void {
+        this.recipesSubscription.unsubscribe();
     }
 
     updatePaginatedRecipes(event?: PageEvent) {
