@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from "rxjs";
 import {Ingredient} from "../core/models/ingredient";
 import {IngredientRecipe} from "../core/models/ingredient-recipe";
 import {DisplayIngredient} from "../dto/display-ingredient";
+import {RecipeStatus} from "../dto/recipe-status";
 
 @Injectable({
     providedIn: 'root',
@@ -18,7 +19,7 @@ export class RecipeServices {
     }
 
     public constructor() {
-        this.load();
+        this.loadRecipe();
     }
 
     public get recipes$(): Observable<RecipeModel[]> {
@@ -41,8 +42,8 @@ export class RecipeServices {
 
     private saveIngredientRecipe(recipe: RecipeModel): void {
         let displayIngredients: DisplayIngredient[] = recipe.ingredients as unknown as DisplayIngredient[];
-        displayIngredients.forEach((ingredient: DisplayIngredient) => {
-            let ingredientRecipe: IngredientRecipe = {
+        displayIngredients.forEach((ingredient: DisplayIngredient): Object => {
+            return {
                 idRecipe: recipe.id,
                 idIngredient: ingredient.ingredient.id,
                 quantity: ingredient.quantity
@@ -65,7 +66,7 @@ export class RecipeServices {
         localStorage.setItem('recipes', JSON.stringify(this._recipes));
     }
 
-    public load(): void {
+    public loadRecipe(): void {
         const recipes: string | null = localStorage.getItem('recipes');
         if (recipes) {
             this._recipes = JSON.parse(recipes) as RecipeModel[];
@@ -73,8 +74,12 @@ export class RecipeServices {
         this._recipesSubject.next(this._recipes);
     }
 
+
+
     public getRecipeById(id: number): RecipeModel | undefined {
-        return this._recipes.find(recipe => recipe.id === id);
+        return this._recipes.find((recipe: RecipeModel) => recipe.id === id);
     }
+
+
 
 }

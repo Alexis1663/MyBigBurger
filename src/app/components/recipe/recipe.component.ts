@@ -10,9 +10,9 @@ import {
 import {MatButton} from '@angular/material/button';
 import {NgIf, SlicePipe} from "@angular/common";
 import {Router} from "@angular/router";
-import { RecipeModel } from '../../core/models/recipe.model';
-import { OrderService } from '../../services/order.service';
-import { Ingredient } from '../../core/models/ingredient';
+import {RecipeModel} from '../../core/models/recipe.model';
+import {OrderService} from '../../services/order.service';
+import {Ingredient} from '../../core/models/ingredient';
 
 @Component({
     selector: 'app-recipe',
@@ -33,30 +33,33 @@ import { Ingredient } from '../../core/models/ingredient';
 })
 export class RecipeComponent {
 
-    @Input() name: string | undefined;
-    @Input() description: string | undefined;
-    @Input() id: number | undefined;
-    @Input() image: string | undefined;
-    @Input() ingredients: Ingredient[] | undefined;
+    @Input() public name: string | undefined;
+    @Input() public description: string | undefined;
+    @Input() public id: number | undefined;
+    @Input() public image: string | undefined;
+    @Input() public ingredients: Ingredient[] | undefined;
 
     public constructor(
         private readonly _router: Router,
-        private readonly orderService: OrderService
+        private readonly _orderService: OrderService
     ) {
     }
 
     public orderRecipe(): void {
         const recipe: RecipeModel = {
-          id: this.id || 0,
-          name: this.name,
-          description: this.description,
-          image: this.image,
-          ingredients: this.ingredients
+            id: this.id || 0,
+            name: this.name,
+            description: this.description,
+            image: this.image,
+            ingredients: this.ingredients
         };
-    
-        this.orderService.addOrderedRecipe(recipe);
-        console.log('Recipe ordered:', recipe);
-      }
+        this._orderService.changeStatusRecipe(recipe);
+    }
+
+    public get isOrdering(): boolean {
+        if(!this.id) return false;
+        return this._orderService.getStatusRecipe(this.id);
+    }
 
     public redirectToRecipeDetail(): void {
         this._router.navigate(['recette', this.id]).then();

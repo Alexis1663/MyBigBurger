@@ -17,7 +17,7 @@
     <mat-card-actions>
         <div class="detail-button-container">
             <button mat-button class="detail-button" (click)="redirectToRecipeDetail()">Voir la recette</button>
-            <button mat-button class="order-recipe" (click)="orderRecipe()">Commandez</button>
+            <button *ngIf="!isOrdering" mat-button class="order-recipe" (click)="orderRecipe()">Commandez</button>
         </div>
     </mat-card-actions>
 </mat-card>
