@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatDialogActions, MatDialogClose, MatDialogContent} from "@angular/material/dialog";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
@@ -7,12 +7,12 @@ import {MatButtonModule} from "@angular/material/button";
 import {ListIngredientsComponent} from "../list-ingredients/list-ingredients.components";
 import {MatOption, MatSelect} from "@angular/material/select";
 import {CommonModule, NgForOf, NgIf} from "@angular/common";
-import {INGREDIENTS} from "../../datas/ingredients.stub";
 import {MatIcon} from "@angular/material/icon";
 import {IngredientRecipe} from "../../core/models/ingredient-recipe";
 import {Ingredient} from "../../core/models/ingredient";
 import { IngredientService } from '../../services/ingredient.service';
 import { Observable } from 'rxjs';
+import {DisplayIngredient} from "../../dto/display-ingredient";
 
 @Component({
     selector: 'app-form-ingredient',
@@ -37,21 +37,21 @@ import { Observable } from 'rxjs';
     templateUrl: './form-ingredient.component.html',
     styleUrl: './form-ingredient.component.scss'
 })
-export class FormIngredientComponent {
+export class FormIngredientComponent implements OnInit {
 
-    @Output() public onAddIngredient: EventEmitter<IngredientRecipe> = new EventEmitter<IngredientRecipe>();
-    public choiceIngredients$!: Observable<Ingredient[]>;
+    @Output() public onAddIngredient: EventEmitter<DisplayIngredient> = new EventEmitter<DisplayIngredient>();
+    public choiceIngredients$: Observable<Ingredient[]> = new Observable<Ingredient[]>();
 
     constructor(
         private readonly _ingredientService: IngredientService
     ) {
     }
 
-    public get choiceIngredients(): Ingredient[] {
-        return INGREDIENTS;
+    ngOnInit(): void {
+        this.initChoiceIngredients();
     }
 
-    ngOnInit(): void {
+    private initChoiceIngredients(): void {
         this.choiceIngredients$ = this._ingredientService.ingredients$;
     }
 

@@ -1,7 +1,5 @@
-import {Ingredient} from "./ingredient";
-
 export interface IngredientRecipe {
-    id: number;
-    ingredient: Ingredient;
+    idIngredient: number;
     quantity: number;
+    idRecipe: number;
 }

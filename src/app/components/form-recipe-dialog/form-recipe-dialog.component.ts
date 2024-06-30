@@ -17,6 +17,7 @@ import {FormIngredientComponent} from "../form-ingredient/form-ingredient.compon
 import {IngredientRecipe} from "../../core/models/ingredient-recipe";
 import {Ingredient} from "../../core/models/ingredient";
 import {RecipeServices} from "../../services/recipe.services";
+import {DisplayIngredient} from "../../dto/display-ingredient";
 
 @Component({
     selector: 'app-form-recipe-dialog',
@@ -50,26 +51,20 @@ export class FormRecipeDialogComponent {
     });
     private readonly _dialogRef: MatDialogRef<FormRecipeDialogComponent> = inject(MatDialogRef<FormRecipeDialogComponent>);
 
-    public constructor(
-        private readonly _recipeServices: RecipeServices,
-    ) {
-    }
-
-    public get ingredientRecipes(): IngredientRecipe[] {
+    public get ingredientRecipes(): DisplayIngredient[] {
         return this.formRecipe.controls['ingredients'].value;
     }
 
-    public set ingredientRecipes(ingredientRecipes: IngredientRecipe[]) {
+    public set ingredientRecipes(ingredientRecipes: DisplayIngredient[]) {
         this.formRecipe.controls['ingredients'].setValue(ingredientRecipes);
     }
 
-    public addIngredient(ingredientRecipe: IngredientRecipe): void {
-        if (this.formRecipe.controls['ingredients'].value.length === 0) {
-            ingredientRecipe.id = 1;
-        } else {
-            let ids: number = this.formRecipe.controls['ingredients'].value.map((ingredientRecipe: IngredientRecipe) => ingredientRecipe.ingredient.id);
-            ingredientRecipe.id = Math.max(ids) + 1;
-        }
+    public constructor(
+        private readonly _recipeServices: RecipeServices
+    ) {
+    }
+
+    public addIngredient(ingredientRecipe: DisplayIngredient): void {
         this.formRecipe.controls['ingredients'].setValue([...this.formRecipe.controls['ingredients'].value, ingredientRecipe]);
     }
 
@@ -80,7 +75,7 @@ export class FormRecipeDialogComponent {
             let fileList: FileList | null = input.files;
             if (fileList) {
                 const file: File = fileList[0];
-                const reader = new FileReader();
+                const reader: FileReader = new FileReader();
                 reader.onload = () => {
                     const base64String = reader.result as string;
                     this.formRecipe.controls['image'].setValue(base64String);
@@ -92,10 +87,6 @@ export class FormRecipeDialogComponent {
 
     public addRecipe(): void {
         if (this.formRecipe.valid) {
-            let ingredients: Ingredient[] = this.formRecipe.controls['ingredients'].value.map((ingredientRecipe: IngredientRecipe) => {
-                return ingredientRecipe.ingredient;
-            });
-            this.formRecipe.controls['ingredients'].setValue(ingredients);
             this._recipeServices.addRecipe(this.formRecipe.value);
             this.formRecipe.reset();
             this._dialogRef.close();

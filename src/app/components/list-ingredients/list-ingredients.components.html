@@ -13,7 +13,7 @@
         <th mat-header-cell *matHeaderCellDef>Action</th>
         <td class="action-container" mat-cell *matCellDef="let element">
             <div class="action-button">
-                <button mat-button (click)="removeIngredient(element.id)">Supprimer</button>
+                <button mat-button (click)="removeIngredient(element.ingredient.id)">Supprimer</button>
             </div>
         </td>
     </ng-container>

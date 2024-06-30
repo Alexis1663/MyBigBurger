@@ -1,5 +1,4 @@
 import { MatTableModule } from '@angular/material/table';
-import { INGREDIENTS } from '../../datas/ingredients.stub';
 import { Ingredient } from '../../core/models/ingredient';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatError, MatFormFieldModule } from '@angular/material/form-field';
