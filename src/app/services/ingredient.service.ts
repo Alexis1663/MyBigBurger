@@ -32,7 +32,7 @@ export class IngredientService {
     }
 
     update(id: number, ingredient: Ingredient): Observable<Ingredient> {
-        return this.http.patch<Ingredient>(`https://664ba07f35bbda10987d9f99.mockapi.io/api/ingredients/${id}`, ingredient)
+        return this.http.put<Ingredient>(`https://664ba07f35bbda10987d9f99.mockapi.io/api/ingredients/${id}`, ingredient)
             .pipe(
                 tap(updatedIngredient => {
                     const updatedIngredients = this._ingredients.value.map(i => i.id === id ? updatedIngredient : i);
